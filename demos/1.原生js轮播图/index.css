@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wrapper{
+    width: 400px;
+    height: 250px;
+    margin: 60px auto;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* 图片 */
+.wrapper .slideBox{
+    width: 2000px;
+    height: 250px;
+    position: absolute;
+}
+.wrapper .slideBox li{
+    width: 400px;
+    height: 250px;
+    float: left;
+}
+.wrapper .slideBox li img{
+    width: 100%;
+    height: 100%;
+}
+
+/* 箭头 */
+.wrapper .arrow-box{
+    width: 100%;
+    height: 35px;
+    /* background: antiquewhite; */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform:translateY(-50%);
+    opacity: 0;
+}
+.wrapper .arrow{
+    width: 35px;
+    height: 35px;
+    background: #000;
+    position: absolute;
+    background-size: 100% 100%;
+}
+.wrapper .left-arrow{
+    background-image: url('imgs/left-arrow.jpg');
+    left: 0;
+}
+.wrapper .right-arrow{
+    background-image: url('imgs/right-arrow.jpg');
+    right: 0;
+}
+
+/* 小圆点 */
+.wrapper .index-box{
+    width: 100%;
+    height: 20px;
+    /* background: pink; */
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    line-height: 20px;
+}
+.wrapper .index-box span{
+    display: inline-block;
+    width: 8px;    
+    height: 8px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: #fff;
+}
+.wrapper .index-box .active{
+    background: #f40;
+}
+

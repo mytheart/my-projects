@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        
+        $('div').on('mousedown', function (e) {
+            var disX = e.clientX - parseInt($(this).css('left'));
+            var disY = e.clientY - parseInt($(this).css('top'));
+            console.log(disX, disY)
+            $(document).on('mousemove', function (e) {
+                var newLeft = e.clientX - disX,
+                    newTop = e.clientY - disY;
+                $('div').css({
+                    'left': newLeft + 'px',
+                    'top': newTop + 'px'
+                })
+            }).on('mouseup', function (e) {
+                $(this).off();
+            })
+        })
+    </script>
+</body>
+
+</html>
