@@ -30,7 +30,7 @@ function type(parameter) {
     }
 }
 
-// 2.数组去重
+// 2.数组去重(1)
 Array.prototype.unique = function () {
     var obj = {};
     return this.filter(function (ele) {
@@ -40,7 +40,7 @@ Array.prototype.unique = function () {
         }
     })
 }
-
+// 2.数组去重(2)
 Array.prototype.unique = function () {
     var obj = {},
         arr = [],
@@ -312,9 +312,9 @@ function addEvent(elem, type, handle) {
 
 // 18.解绑事件
 function removeEvent(elem, type, handle) {
-    if (elem.removeEventListener) {//非ie和非ie9
+    if (elem.removeEventListener) { //非ie和非ie9
         elem.removeEventListener(type, handle, false);
-    } else if (elem.detachEvent) {//ie6到ie8
+    } else if (elem.detachEvent) { //ie6到ie8
         elem.detachEvent('on' + type, handle);
     } else {
         elem['on' + type] = null;
@@ -491,7 +491,7 @@ Array.prototype.myReduce = function (func, initialValue) {
     return nextValue;
 }
 
-// 实现bind()方法
+// 30.实现bind()方法
 Function.prototype.myBind = function (target) {
     var target = target || window;
     var _self = this;
@@ -506,7 +506,7 @@ Function.prototype.myBind = function (target) {
     return F;
 }
 
-// 获取url中的参数   
+// 31.获取url中的参数   
 function showWindonHref() {
     var sHref = window.location.href;
     var args = sHref.split('?');
@@ -522,7 +522,7 @@ function showWindonHref() {
     return obj;
 }
 
-//  冒泡排序(升序)
+//  32.冒泡排序(升序)
 function bubbleSort(arr) {
     var len = arr.length;
     for (var i = 0; i < len - 1; i++) {
@@ -535,4 +535,15 @@ function bubbleSort(arr) {
         }
     }
     return arr;
+}
+
+// 33.遍历Dom树
+// 给定页面上的DOM元素,将访问元素本身及其所有后代(不仅仅是它的直接子元素)
+// 对于每个访问的元素，函数讲元素传递给提供的回调函数
+function traverse(element, callback) {
+    callback(element);
+    var list = element.children;
+    for (var i = 0; i < list.length; i++) {
+        traverse(list[i], callback);
+    }
 }
