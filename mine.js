@@ -88,7 +88,7 @@ function deepClone(origin, target) {
             }
             deepClone(origin[prop], target[prop]);
         } else {
-            //   原始值
+            //   原始值或function
             target[prop] = origin[prop];
         }
     }
