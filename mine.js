@@ -559,8 +559,8 @@ function ajax(method, url, callback, data, flag) {
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHttp');
     }
-    xhr.onreadystatechange = function () {
 
+    xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             console.log(2)
             callback(xhr.responseText);
@@ -574,7 +574,7 @@ function ajax(method, url, callback, data, flag) {
         xhr.send()
     } else if (method == 'POST') {
         xhr.open('POST', url, flag);
-        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
     }
 }
