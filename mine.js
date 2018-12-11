@@ -491,22 +491,8 @@ Array.prototype.myReduce = function (func, initialValue) {
     return nextValue;
 }
 
-// 30.实现bind()方法
-Function.prototype.myBind = function (target) {
-    var target = target || window;
-    var _self = this;
-    var args = [].slice.call(arguments, 1);
-    var temp = function () {};
-    var F = function () {
-        var _arg = [].slice.call(arguments, 0);
-        return _self.apply(this instanceof temp ? this : target, args.concat(_arg))
-    }
-    temp.prototype = this.prototype;
-    F.prototype = new temp();
-    return F;
-}
 
-// 31.获取url中的参数   
+// 30m.获取url中的参数   
 function showWindonHref() {
     var sHref = window.location.href;
     var args = sHref.split('?');
@@ -522,7 +508,7 @@ function showWindonHref() {
     return obj;
 }
 
-//  32.冒泡排序(升序)
+//  31.冒泡排序(升序)
 function bubbleSort(arr) {
     var len = arr.length;
     for (var i = 0; i < len - 1; i++) {
@@ -537,7 +523,7 @@ function bubbleSort(arr) {
     return arr;
 }
 
-// 33.遍历Dom树
+// 32.遍历Dom树
 // 给定页面上的DOM元素,将访问元素本身及其所有后代(不仅仅是它的直接子元素)
 // 对于每个访问的元素，函数讲元素传递给提供的回调函数
 function traverse(element, callback) {
@@ -548,7 +534,7 @@ function traverse(element, callback) {
     }
 }
 
-// 34.原生js封装ajax
+// 33.原生js封装ajax
 function ajax(method, url, callback, data, flag) {
     var xhr;
     flag = flag || true;
@@ -579,7 +565,7 @@ function ajax(method, url, callback, data, flag) {
     }
 }
 
-// 35.异步加载script
+// 34.异步加载script
 function loadScript(url, callback) {
     var oscript = document.createElement('script');
     if (oscript.readyState) { // ie8及以下版本
@@ -597,7 +583,7 @@ function loadScript(url, callback) {
     document.body.appendChild(oscript);
 }
 
-// 36.cookie管理
+// 35.cookie管理
 var cookie = {
     set: function (name, value, time) {
         document.cookie = name + '=' + value + '; max-age=' + time;
@@ -615,5 +601,66 @@ var cookie = {
             }
         }
         return undefined;
+    }
+}
+
+// 36.实现bind()方法
+Function.prototype.myBind = function (target) {
+    var target = target || window;
+    var _self = this;
+    var args = [].slice.call(arguments, 1);
+    var temp = function () {};
+    var F = function () {
+        var _arg = [].slice.call(arguments, 0);
+        return _self.apply(this instanceof temp ? this : target, args.concat(_arg))
+    }
+    temp.prototype = this.prototype;
+    F.prototype = new temp();
+    return F;
+}
+
+// 37.实现call()方法
+Function.prototype.myCall = function () {
+    var ctx = arguments[0] || window;
+    ctx.fn = this;
+    var args = [];
+    var args1 = [];
+    for (var i = 1; i < arguments.length; i++) {
+        args.push('arguments[' + i + ']')
+    }
+    var result = eval('ctx.fn(' + args.join() + ')');
+    delete ctx.fn;
+    return result;
+}
+
+// 38.实现apply()方法
+Function.prototype.myApply = function () {
+    var ctx = arguments[0] || window;
+    ctx.fn = this;
+    if (!arguments[1]) {
+        var result = ctx.fn();
+        delete ctx.fn;
+        return result;
+    } else {
+        var args = [];
+        for (var i = 1; i < arguments.length; i++) {
+            args.push('arguments[' + i + ']');
+        }
+        var result = eval('ctx.fn(' + args.join() + ')');
+        delete ctx.fn;
+        return result;
+    }
+}
+
+// 39.防抖
+function debounce(handle, delay) {
+    var timer = null;
+    return function () {
+        var _self = this,
+            _args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            handle.apply(_self, _args)
+        }, delay)
     }
 }
