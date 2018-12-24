@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root,
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #c3c3c3;
+}
+
+.wrapper {
+    overflow: hidden;
+    position: relative;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 460px;
+    height: 680px;
+    border: 1px solid #000;
+    background: #fff;
+    border-radius: 15px;
+}
+
+.wrapper .header {
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    background-color: #000;
+    color: #fff;
+
+}
+
+.wrapper .header .name{
+    display: inline-block;
+    margin-left: 10px;
+}
+.wrapper .header .dot {
+    position: absolute;
+    right: 15px;
+    top: -5px;
+    font-weight: bold;
+}
+
+.wrapper .content {
+    width: 100%;
+    height: 580px;
+    background-image: url('./imgs/bg.jpg');
+    background-size: contain;
+    overflow-y: scroll;
+}
+
+.wrapper .content .inner {
+    width: 100%;
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 10px;
+    /* background: #fff; */
+}
+
+.wrapper .content .talk {
+    margin-bottom: 6px;
+}
+
+.wrapper .content .talk .user {
+    vertical-align: middle;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+.wrapper .content .talk .text {
+    word-wrap: break-word;
+    display: inline-block;
+    background-color: #fff;
+    max-width: 70%;
+    /* min-height: 50px; */
+    line-height: 50px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    position: relative;
+    margin: 0 10px;
+}
+
+.wrapper .content .talk .text::after {
+    position: absolute;
+    right: -19px;
+    top: 15px;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-left-color: #fff;
+}
+
+.wrapper .content .talk.robot .text::after {
+    left: -19px;
+    border: 10px solid transparent;
+    border-right-color: #fff;
+}
+
+.wrapper .content .talk.my {
+    text-align: right;
+}
+
+.wrapper .content .talk.my .user {
+    background-image: url('./imgs/my.jpg');
+    background-size: cover;
+    float: right;
+}
+
+/* .wrapper .content .talk.my::after{
+    content: '';
+    display: block;
+    clear: both;
+} */
+.wrapper .content .talk.robot {
+    text-align: left;
+}
+
+.wrapper .content .talk.robot .user {
+    background-image: url('./imgs/tongtong.jpg');
+    background-size: cover;
+    float: left;
+}
+
+.wrapper .footer {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+
+.wrapper .footer .ipt {
+    outline: none;
+    width: 80%;
+    height: 70%;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.wrapper .footer .btn {
+    border: 0;
+    background-color: green;
+    color: #fff;
+    font-size: 15px;
+    width: 12%;
+    height: 73%;
+    cursor: pointer;
+}
