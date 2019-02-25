@@ -47,11 +47,36 @@ Array.prototype.unique = function () {
         len = this.length;
     for (var i = 0; i < len; i++) {
         if (!obj[this[i]]) {
-            obj[this[i]] = 'a';
+            obj[this[i]] = 1;
             arr.push(this[i]);
         }
     }
     return arr;
+}
+
+function unique1(arr) {
+    var newArr = [];
+    var len = arr.length;
+    for (var i = 0; i < len; i++) {
+        if (newArr.indexOf(arr[i]) == -1) {
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
+}
+
+function unique3(arr) {
+    var newArr = [];
+    var len = arr.length;
+    for (var i = 0; i < len; i++) {
+        for (var j = i + 1; j < len; j++) {
+            if (arr[i] === arr[j]) {
+                j = ++i;
+            }
+        }
+        newArr.push(arr[i]);
+    }
+    return newArr;
 }
 
 //3.字符串去重 
@@ -508,7 +533,40 @@ function showWindonHref() {
     return obj;
 }
 
-//  31.冒泡排序(升序)
+//  31.数组排序
+// 快排 [left] + min + [right]
+function quickArr(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    }
+    var left = [],
+        right = [];
+    var pIndex = Math.floor(arr.length / 2);
+    var p = arr.splice(pIndex, 1)[0];
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] <= p) {
+            left.push(arr[i]);
+        } else {
+            right.push(arr[i]);
+        }
+    }
+    // 递归
+    return quickArr(left).concat([p], quickArr(right));
+}
+
+function bubbleSort(arr) {
+    for (var i = 0; i < arr.length - 1; i++) {
+        for (var j = i + 1; j < arr.length; j++) {
+            if (arr[i] > arr[j]) {
+                var temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
 function bubbleSort(arr) {
     var len = arr.length;
     for (var i = 0; i < len - 1; i++) {
@@ -664,3 +722,23 @@ function debounce(handle, delay) {
         }, delay)
     }
 }
+
+// requestAnimFrame兼容性方法
+window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
+// cancelAnimFrame兼容性方法
+window.cancelAnimFrame = (function () {
+    return window.cancelAnimationFrame ||
+        window.webkitCancelAnimationFrame ||
+        window.mozCancelAnimationFrame ||
+        function (id) {
+            window.clearTimeout(id);
+        };
+})();
