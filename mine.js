@@ -665,14 +665,15 @@ var cookie = {
 // 36.实现bind()方法
 Function.prototype.myBind = function (target) {
     var target = target || window;
-    var _self = this;
-    var args = [].slice.call(arguments, 1);
+    var _args1 = [].slice.call(arguments, 1);
+    var self = this;
     var temp = function () {};
     var F = function () {
-        var _arg = [].slice.call(arguments, 0);
-        return _self.apply(this instanceof temp ? this : target, args.concat(_arg))
+        var _args2 = [].slice.call(arguments, 0);
+        var parasArr = _args1.concat(_args2);
+        return self.apply(this instanceof temp ? this : target, parasArr)
     }
-    temp.prototype = this.prototype;
+    temp.prototype = self.prototype;
     F.prototype = new temp();
     return F;
 }
@@ -682,11 +683,10 @@ Function.prototype.myCall = function () {
     var ctx = arguments[0] || window;
     ctx.fn = this;
     var args = [];
-    var args1 = [];
     for (var i = 1; i < arguments.length; i++) {
-        args.push('arguments[' + i + ']')
+        args.push(arguments[i])
     }
-    var result = eval('ctx.fn(' + args.join() + ')');
+    var result = ctx.fn(...args);
     delete ctx.fn;
     return result;
 }
@@ -699,15 +699,10 @@ Function.prototype.myApply = function () {
         var result = ctx.fn();
         delete ctx.fn;
         return result;
-    } else {
-        var args = [];
-        for (var i = 1; i < arguments.length; i++) {
-            args.push('arguments[' + i + ']');
-        }
-        var result = eval('ctx.fn(' + args.join() + ')');
-        delete ctx.fn;
-        return result;
     }
+    var result = ctx.fn(...arguments[1]);
+    delete ctx.fn;
+    return result;
 }
 
 // 39.防抖
@@ -742,3 +737,21 @@ window.cancelAnimFrame = (function () {
             window.clearTimeout(id);
         };
 })();
+
+// jsonp底层方法
+function jsonp(url, callback) {
+    var oscript = document.createElement('script');
+    if (oscript.readyState) { // ie8及以下版本
+        oscript.onreadystatechange = function () {
+            if (oscript.readyState === 'complete' || oscript.readyState === 'loaded') {
+                callback();
+            }
+        }
+    } else {
+        oscript.onload = function () {
+            callback()
+        };
+    }
+    oscript.src = url;
+    document.body.appendChild(oscript);
+}
