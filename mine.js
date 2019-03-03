@@ -121,14 +121,17 @@ function deepClone(origin, target) {
 }
 
 // 深浅克隆是针对引用值
-// 缺点：有字符串的会被分割成类数组
 function deepClone1(obj) {
-    if (typeof obj != "object") {
+    if (typeof obj !== 'object') {
         return obj;
     }
-    var result = {};
-    for (var i in obj) {
-        result[i] = deepClone1(obj[i]);
+    if (Object.prototype.toString.call(obj) === '[object Array]') {
+        var result = [];
+    } else {
+        var result = {};
+    }
+    for (var prop in obj) {
+        result[prop] = deepClone1(obj[prop])
     }
     return result;
 }
