@@ -121,18 +121,18 @@ function deepClone(origin, target) {
 }
 
 // 深浅克隆是针对引用值
-// 缺点：(1)无法复制函数(3)有字符串的会被分割成类数组
+// 缺点：有字符串的会被分割成类数组
 function deepClone1(obj) {
     if (typeof obj != "object") {
         return obj;
     }
     var result = {};
     for (var i in obj) {
-        result[i] = deepClone(obj[i]);
+        result[i] = deepClone1(obj[i]);
     }
     return result;
 }
-
+// 无法复制函数
 var o1 = JSON.parse(JSON.stringify(obj1));
 
 // 5.reverse底层原理和扩展
