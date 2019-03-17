@@ -758,3 +758,21 @@ function jsonp(url, callback) {
     oscript.src = url;
     document.body.appendChild(oscript);
 }
+
+// 获取url上的参数
+function getUrlParam(sUrl, sKey) {
+    var result = {};
+    sUrl.replace(/(\w+)=(\w+)(?=[&|#])/g, function (ele, key, val) {
+        if (!result[key]) {
+            result[key] = val;
+        } else {
+            var temp = result[key];
+            result[key] = [].concat(temp, val);
+        }
+    })
+    if (!sKey) {
+        return result;
+    } else {
+        return result[sKey] || '';
+    }
+}
