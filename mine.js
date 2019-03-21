@@ -800,3 +800,9 @@ function formatDate(t, str) {
         return obj[$1]
     });
 }
+
+// 验证邮箱的正则表达式
+function isAvailableEmail(sEmail) {
+    var reg=/^([\w+\.])+@\w+([.]\w+)+$/
+    return reg.test(sEmail)
+}
