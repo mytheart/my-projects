@@ -26,7 +26,7 @@ var endScore = document.getElementsByClassName('endScore')[0];
 var timerId,
     startGameBool = true,
     startPauseBool = true;
-speed = 130;
+    speed = 130;
 
 init()
 
@@ -59,7 +59,6 @@ function init() {
 
     bindEvent();
 }
-
 // 开始游戏
 function startGame() {
     startPage.style.display = 'none';
