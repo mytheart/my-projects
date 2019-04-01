@@ -825,3 +825,14 @@ function curryIt(fn) {
      
     return result;
 }
+
+// 单例模式
+function getSingle(func) {
+    var result;
+    return function () {
+        if (!result) {
+            result = func.apply(this, arguments);
+        }
+        return result;
+    }
+}
