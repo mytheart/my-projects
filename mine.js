@@ -1,82 +1,31 @@
-//   1.返回数据类型
-/**
- * 输入一个值，返回其数据类型
- * @param  要获取数据类型的值
- */
-function type(parameter) {
-    var tmp = typeof (parameter);
-    if (tmp == "object") {
-        // 引用值或null
-        var num = Object.prototype.toString.call(parameter);
-        switch (num) {
-            case "[object Array]":
-                return "[object Array]";
-            case "[object Object]":
-                return "[object Object]";
-            case "[object Null]":
-                return "null";
-            case "[object Boolean]":
-                return "[object Boolean]";
-            case "[object Number]":
-                return "[object Number]";
-            case "[object String]":
-                return "[object String]";
-            default:
-                alert('error');
-        }
-    } else {
-        // 原始值
-        return tmp;
-    }
+// 1.输入一个值，返回其数据类型
+function type(para) {
+    return Object.prototype.toString.call(para)
 }
 
 // 2.数组去重(1)
-Array.prototype.unique = function () {
+function unique1(arr) {
+    return [...new Set(arr)]
+}
+
+function unique2(arr) {
     var obj = {};
-    return this.filter(function (ele) {
+    return arr.filter(ele => {
         if (!obj[ele]) {
-            obj[ele] = 1;
+            obj[ele] = true;
             return true;
         }
     })
 }
-// 2.数组去重(2)
-Array.prototype.unique = function () {
-    var obj = {},
-        arr = [],
-        len = this.length;
-    for (var i = 0; i < len; i++) {
-        if (!obj[this[i]]) {
-            obj[this[i]] = 1;
-            arr.push(this[i]);
-        }
-    }
-    return arr;
-}
-
-function unique1(arr) {
-    var newArr = [];
-    var len = arr.length;
-    for (var i = 0; i < len; i++) {
-        if (newArr.indexOf(arr[i]) == -1) {
-            newArr.push(arr[i]);
-        }
-    }
-    return newArr;
-}
 
 function unique3(arr) {
-    var newArr = [];
-    var len = arr.length;
-    for (var i = 0; i < len; i++) {
-        for (var j = i + 1; j < len; j++) {
-            if (arr[i] === arr[j]) {
-                j = ++i;
-            }
+    var result = [];
+    arr.forEach(ele => {
+        if (result.indexOf(ele) == -1) {
+            result.push(ele)
         }
-        newArr.push(arr[i]);
-    }
-    return newArr;
+    })
+    return result;
 }
 
 //3.字符串去重 
@@ -520,7 +469,7 @@ Array.prototype.myReduce = function (func, initialValue) {
 }
 
 
-// 30m.获取url中的参数   
+// 30.获取url中的参数   
 function showWindonHref() {
     var sHref = window.location.href;
     var args = sHref.split('?');
@@ -721,6 +670,21 @@ function debounce(handle, delay) {
     }
 }
 
+// 40.节流
+function throttle(handler, wait) {
+    var lastTime = 0;
+    return function (e) {
+        var nowTime = new Date().getTime();
+        if (nowTime - lastTime > wait) {
+            handler.apply(this, arguments);
+            lastTime = nowTime;
+        }
+    }
+}
+
+
+
+
 // requestAnimFrame兼容性方法
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
@@ -803,7 +767,7 @@ function formatDate(t, str) {
 
 // 验证邮箱的正则表达式
 function isAvailableEmail(sEmail) {
-    var reg=/^([\w+\.])+@\w+([.]\w+)+$/
+    var reg = /^([\w+\.])+@\w+([.]\w+)+$/
     return reg.test(sEmail)
 }
 
@@ -813,17 +777,32 @@ function isAvailableEmail(sEmail) {
 function curryIt(fn) {
     var length = fn.length,
         args = [];
-    var result =  function (arg){
+    var result = function (arg) {
         args.push(arg);
-        length --;
-        if(length <= 0 ){
+        length--;
+        if (length <= 0) {
             return fn.apply(this, args);
         } else {
             return result;
         }
     }
-     
+
     return result;
+}
+
+// 大数相加
+function sumBigNumber(a, b) {
+    var res = '', //结果
+        temp = 0; //按位加的结果及进位
+    a = a.split('');
+    b = b.split('');
+    while (a.length || b.length || temp) {
+        //~~按位非 1.类型转换，转换成数字 2.~~undefined==0 
+        temp += ~~a.pop() + ~~b.pop();
+        res = (temp % 10) + res;
+        temp = temp > 9;
+    }
+    return res.replace(/^0+/, '');
 }
 
 // 单例模式
