@@ -3,7 +3,8 @@ function type(para) {
     return Object.prototype.toString.call(para)
 }
 
-// 2.数组去重(1)
+
+// 2.数组去重
 function unique1(arr) {
     return [...new Set(arr)]
 }
@@ -28,6 +29,7 @@ function unique3(arr) {
     return result;
 }
 
+
 //3.字符串去重 
 String.prototype.unique = function () {
     var obj = {},
@@ -42,45 +44,55 @@ String.prototype.unique = function () {
     return str;
 }
 
-String.prototype.unique1 = function () {
-    return str.split("").unique().join("")
+
+// 4.去除连续的字符串 
+function uniq(str) {
+    return str.replace(/(\w)\1+/g, '$1')
 }
 
+
 //4.深克隆（深克隆不考虑函数）
-function deepClone(origin, target) {
-    var target = target || {};
-    for (var prop in origin) {
-        if (!origin.hasOwnProperty(prop)) {
-            return false;
-        }
-        if (type(origin[prop]) == "object" && origin[prop] !== "null") {
-            //  引用值
-            if (Object.prototype.toString.call(origin[prop] == "[object Array]")) {
-                target[prop] = [];
-            } else if (Object.prototype.toString.call(origin[prop]) == "[object Object]") {
-                target[prop] = {};
+function deepClone(obj, result) {
+    var result = result || {};
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            if (typeof obj[prop] == 'object' && obj[prop] !== null) {
+                // 引用值(obj/array)且不为null
+                if (Object.prototype.toString.call(obj[prop]) == '[object Object]') {
+                    // 对象
+                    result[prop] = {};
+                } else {
+                    // 数组
+                    result[prop] = [];
+                }
+                deepClone(obj[prop], result[prop])
+
+            } else {
+                // 原始值或func
+                result[prop] = obj[prop]
             }
-            deepClone(origin[prop], target[prop]);
-        } else {
-            //   原始值或function
-            target[prop] = origin[prop];
         }
     }
-    return target;
+    return result;
 }
 
 // 深浅克隆是针对引用值
-function deepClone1(obj) {
-    if (typeof obj !== 'object') {
-        return obj;
+function deepClone(target) {
+    if (typeof (target) !== 'object') {
+        return target;
     }
-    if (Object.prototype.toString.call(obj) === '[object Array]') {
-        var result = [];
+    var result;
+    if (Object.prototype.toString.call(target) == '[object Array]') {
+        // 数组
+        result = []
     } else {
-        var result = {};
+        // 对象
+        result = {};
     }
-    for (var prop in obj) {
-        result[prop] = deepClone1(obj[prop])
+    for (var prop in target) {
+        if (target.hasOwnProperty(prop)) {
+            result[prop] = deepClone(target[prop])
+        }
     }
     return result;
 }
@@ -98,17 +110,8 @@ Array.prototype.myReverse = function () {
     }
     return this;
 }
-// 不改变原数组
-Array.prototype.invert = function () {
-    var temp = [],
-        len = this.length - 1
-    for (var i = len; i >= 0; i--) {
-        temp.push(this[i])
-    }
-    return temp;
-}
 
-//6. 继承
+//6. 圣杯模式的继承
 function inherit(Target, Origin) {
     function F() {};
     F.prototype = Origin.prototype;
@@ -506,6 +509,7 @@ function quickArr(arr) {
     return quickArr(left).concat([p], quickArr(right));
 }
 
+// 冒泡
 function bubbleSort(arr) {
     for (var i = 0; i < arr.length - 1; i++) {
         for (var j = i + 1; j < arr.length; j++) {
@@ -682,10 +686,7 @@ function throttle(handler, wait) {
     }
 }
 
-
-
-
-// requestAnimFrame兼容性方法
+// 41.requestAnimFrame兼容性方法
 window.requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
@@ -695,7 +696,7 @@ window.requestAnimFrame = (function () {
         };
 })();
 
-// cancelAnimFrame兼容性方法
+// 42.cancelAnimFrame兼容性方法
 window.cancelAnimFrame = (function () {
     return window.cancelAnimationFrame ||
         window.webkitCancelAnimationFrame ||
@@ -705,7 +706,7 @@ window.cancelAnimFrame = (function () {
         };
 })();
 
-// jsonp底层方法
+// 43.jsonp底层方法
 function jsonp(url, callback) {
     var oscript = document.createElement('script');
     if (oscript.readyState) { // ie8及以下版本
@@ -723,7 +724,7 @@ function jsonp(url, callback) {
     document.body.appendChild(oscript);
 }
 
-// 获取url上的参数
+// 44.获取url上的参数
 function getUrlParam(sUrl, sKey) {
     var result = {};
     sUrl.replace(/(\w+)=(\w+)(?=[&|#])/g, function (ele, key, val) {
@@ -741,7 +742,7 @@ function getUrlParam(sUrl, sKey) {
     }
 }
 
-// 格式化时间
+// 45.格式化时间
 function formatDate(t, str) {
     var obj = {
         yyyy: t.getFullYear(),
@@ -765,13 +766,13 @@ function formatDate(t, str) {
     });
 }
 
-// 验证邮箱的正则表达式
+// 46.验证邮箱的正则表达式
 function isAvailableEmail(sEmail) {
     var reg = /^([\w+\.])+@\w+([.]\w+)+$/
     return reg.test(sEmail)
 }
 
-// 函数柯里化
+// 47.函数柯里化
 //是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术
 
 function curryIt(fn) {
@@ -790,7 +791,7 @@ function curryIt(fn) {
     return result;
 }
 
-// 大数相加
+// 48.大数相加
 function sumBigNumber(a, b) {
     var res = '', //结果
         temp = 0; //按位加的结果及进位
@@ -805,7 +806,7 @@ function sumBigNumber(a, b) {
     return res.replace(/^0+/, '');
 }
 
-// 单例模式
+// 49.单例模式
 function getSingle(func) {
     var result;
     return function () {
