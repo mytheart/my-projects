@@ -1,0 +1,11 @@
+body{
+    margin: 0;
+    background-color: pink;
+}
+h2{
+    color: red;
+}
+img{
+    width: 150px;
+    border: 1px solid #000;
+}

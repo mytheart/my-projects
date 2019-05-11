@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login</title>
+    <link rel="stylesheet" href="./login.css">
+</head>
+
+<body>
+    <!-- ajax方式登录 -->
+    <input type="text" placeholder="请输入用户名" id="username">
+    <input type="password" placeholder="请输入密码" id="password">
+    <input type="submit" id="submit">
+
+    <!-- form表单方式登录 -->
+    <!-- <form method="post" action="/login">
+        <input type="text" name="username" placeholder="请输入用户名" id="username">
+        <input type="password" name="password" placeholder="请输入密码" id="password">
+        <input type="submit" id="submit">
+    </form> -->
+
+    <script>
+        var submit = document.getElementById('submit');
+        submit.onclick = function () {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var params = `username=${username}&password=${password}`;
+            var xml=new XMLHttpRequest();
+            xml.open('post','/login?',true)
+            xml.send(params)
+            xml.onreadystatechange=function(){
+                if(xml.readyState==4 && xml.status==200){
+                    console.log(xml.responseText)
+                    if(xml.responseText==='ok'){
+                        alert('ok')
+                        location.href='/main.html'
+                    }else{
+                        alert('fail')
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
