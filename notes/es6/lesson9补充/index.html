@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src='./MyPromise.js'></script>
+    <script>
+        // Promise
+        // Promise.reject
+        // let oP = new Promise((res, rej) => {
+        //     rej('err');
+        // });
+        // oP.then(null, (val) => {
+        //     console.log(val);
+        // });
+
+        // let oP = Promise.reject('err1');
+        // oP.then(null, (val) => {
+        //     console.log(val);
+        // });   
+        // let oP=Promise.resolve('success');
+        // oP.then((val)=>{
+        //     console.log(val)
+        // })
+        
+
+        // 
+        // let oP = new Promise(function (res, rej) {
+        //     res('success');
+        // });
+        //
+        // let oP = Promise.resolve('success');
+
+        
+        // 
+
+        // let oP = new MyPromise((res, rej) => {
+        //     rej('err');
+        //     // throw 'err';
+        //     // res('a');
+        // });
+        // // Promise.prototype.catch
+        // oP.catch((data) => {
+        //     console.log(data);
+        //     throw 'err2';
+        // }).then((val) => {
+        //     console.log(val)
+        // }, (reason) => {
+        //     console.log(reason);
+        // }); 
+
+        // oP.then(null, (data) => {
+        //     console.log(data);
+        //     throw 'err2';
+        // }).then((val) => {
+        //     console.log(val)
+        // }, (reason) => {
+        //     console.log(reason);
+        // });
+
+
+        // let oP = MyPromise.resolve('success');
+        // // finally  then  
+
+        // oP.finally(() => {
+        //     console.log('over');
+        // }).then((val) => {
+        //     console.log(val);
+        // }, (reason) => {    
+        //     console.log(reason)
+        // });
+
+
+        //Promise.all
+        // function readFile (path) {
+        //     return new MyPromise((res, rej) => {
+        //         setInterval(() => {
+        //             rej(path);
+        //         }, parseInt(Math.random() * 500));
+        //     });  
+        // };
+
+
+
+        // 1. []   尽量都是Promise对象 
+        // 2. 返回Promise 对象
+        // 3. then 成功  参数 按顺序放置结果
+
+
+        // MyPromise.all([readFile('duyi1'), readFile('duyi2'), 'duyi3']).then((val) => {
+        //     console.log(val);
+        // }, (reason) => {
+        //     console.log(reason);
+        // });
+
+
+
+
+
+
+
+
+
+        
+        // Promise.resolve
+        // Promise.all
+        // Promise.prototype.catch finally
+
+
+        
+
+
+
+
+        // find findIndex includes
+
+        let arr = [10, 20, 30, 4, 50, 60, 70];
+        // filter map forEach
+
+        // let ele = arr.findIndex(value => value < 10);
+
+        // console.log(ele);
+
+        // indexOf
+        // console.log(arr.includes(5));
+
+
+
+        // keys values entries
+        // for of
+        // for (let key of arr.values()) {
+        //     console.log(key);
+        // }
+
+        // arr.keys => 所有数组中元素对应属性名的集合  可便利的迭代对象
+        // for of   next => {value, done}
+        // arr.values  所有数组中元素的集合 可便利的迭代对象
+        // for of  next => {value, done}
+        // arr.entries => 所有数组中元素和对应的属性名字所构成的数组的集合
+
+
+
+        
+        // let oArrIterator = arr.entries();
+        // for (let key of oArrIterator) {
+        //     console.log(key);
+        // };
+
+
+        // let oArrIterator = arr.values();
+
+        // for (let key of oArrIterator) {
+        //     console.log(key);
+        // }
+
+
+
+        // Object.keys Object.valuse Object.entrise;
+
+        // 数据劫持
+
+        // Object.keys
+        // var obj = {
+        //     name: 'cst',
+        //     age: 18
+        // };
+
+
+        // includes  startsWith endsWith  
+        // var str = 'web duyi';
+        // console.log(str.includes('bd'));
+        // console.log(str.startsWith('wea'));
+        // console.log(str.endsWith('7yi'));
+
+        // ES6 阮一峰
+
+
+        // 模板字符串 模块化
+
+
+        // let {value, done} = oArrIterator.next();
+        // // {value: val, done: false}
+        // let {value: value1, done: done1} = oArrIterator.next();
+    
+       // Array.from 
+       // Array.prototype.from
+      
+       
+    </script>
+</body>
+</html>

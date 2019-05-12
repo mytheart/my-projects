@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="show"></div>
+    <!-- ES6模块机制 -->
+    
+    <script>
+        
+
+
+
+        // commonjs node 
+        // ES6 esModule 前端使用为主
+        // webpack  commonjs 
+        // require(''); 
+        // ES6 import 
+
+        // ES6中一个模块就是一个js文件  
+        // 一个js文件可以在一定条件（在模块依赖网）理解成模块
+        // 
+
+
+        // 如何导入
+        // 如何导出
+        // import 导入值 定义这个变量
+        // 按需导入
+        // import {b} from './module2.js';
+        // console.log(b);
+        // import {a} from './module2.js';
+        // import {a} from './module2.js';
+        // import {x, z} from './module3.js';
+        // console.log(x, z);
+
+        // import {say, Person} from './module3.js';
+        // say();
+        // let oP = new Person('cst', 20);
+        // oP.sayName();
+
+
+        // 全体导入
+        // import * as allObj from './module3.js';
+        // console.log(allObj.x, allObj.say, allObj.Person)
+
+        // 默认导入
+        import b, {w, c} from './module4.js';
+        console.log(b, w, c);
+
+        // 
+        // import {sayHello} from './module4.js';
+        // sayHello();
+        // setInterval(() => {
+        //     sayHello();
+        // }, 2000);
+
+        
+        // import {a} from './module4.js';
+        // console.log(a);
+        // setInterval(() => {
+        //     console.log(a);
+        // }, 2000);
+
+        // 补充说明
+        // 1. import 会提升到最上面
+        // 2. js文件是模块 'use strict'; 
+        
+
+
+        // commonjs node
+        // webpack 基于node 迎合commonjs
+        // require() module.exports  
+        // vue react ES6 webpack
+        // webpack babel/core babel/preset-env
+         // ES6 模块 => commonjs语法
+
+
+        // 同步加载问题
+
+        // import 'http://code.jquery.com/jquery-2.1.1.min.js';
+        // console.log(1);
+        // console.log($);
+  
+        // 按需加载问题
+        // let flag = Math.random() > 0.5 ? true : false;
+        // if (flag) {
+        //     import a from './module6-1.js';
+        // }else {
+        //     import b from './module6-1.js';
+        // };
+        // export 
+        // console.log(a, b);
+
+        // import();
+        // import  导入值
+        // 1.异步导入 2.返回值是promise 3.按需导入
+
+    //    import('./module7.js').then( ({a, b}) => {
+    //         console.log(a, b);
+    //    });
+    //    console.log('demo')
+
+        // import('http://code.jquery.com/jquery-2.1.1.min.js').then(() => {
+        //     console.log($);
+        // });
+        // console.log('demo');
+
+        // setInterval(() => {
+        //     console.log($);
+        // }, 3000);
+
+        // let flag = Math.random() > 0.5 ? true : false;
+        // if (flag) {
+        //    import('./module6-1.js').then(({a}) => {
+        //         console.log(a);
+        //    });
+        // }else {
+        //    import('./module6-2.js').then( ({a}) => {
+        //        console.log(a);
+        //    });
+        // };
+
+
+        // function importPath () {
+        //     let flag = Math.random() > 0.5 ? true : false;
+        //     let path = flag ? './module6-1.js' : './module6-2.js'
+        //     return import(path);
+        // };
+
+        // importPath().then(({a}) => {
+        //     console.log(a);
+        // });
+
+        // Promise.all([import('./module8-1.js'), import('./module8-2.js'), import('./module8-3.js')]).then(([{x, y}, {a, b}, {m, n, l}]) => {
+        //     console.log(x, y, a, b, m, n, l);
+        // });
+    
+
+        // ES6模块机制 
+        // import a from './module2.js';
+        // console.log(a);
+        // import('./module2.js').then((val) => {
+        //     console.log(val.default);
+        // });
+
+
+        // 模板 jQuery 字符串
+
+        // var str = 'cst';
+        // function introduce (name, age) {
+        //     // var str = '你好:' + name + '我今年' + age + '岁了';
+        //     var str = `你好:${name}我今年${age}岁了`;
+        //     console.log(str);
+        // };
+        // introduce('cst', 20);
+
+
+
+        let title = 'web';
+        let des = 'good';
+        // let str = '<div>\
+        //     <h1>' + title +'</h1>\
+        //     <span>' + des + '<span/>\
+        // </div>';
+        // let a = 10;
+        // let arr = ['a', 'b', 'c'];
+        // let str = `<div>
+        //     <h1>${title}</h1>
+        //     <span>${des}</span>
+        //     <span>${a * a}</span>
+        //     <span>${{}}</span>
+        // </div>`;
+        // let oDiv = document.getElementById('show');
+        // oDiv.innerHTML = str;
+
+        // class Person {
+        //     constructor (name, age) {
+        //         this.name = name;
+        //         this.age = age;
+        //     }
+        //     say(des) {
+        //         console.log( `我叫${this.name},今年${this.age}, 我很${des}`);
+        //     }
+        // };
+        // var oP = new Person('陈思彤', 20);
+        // var oP2 = new Person('邓旭明', 50);
+
+        // oP.say('帅');
+        // oP2.say('虚');
+
+
+    </script>
+
+
+    <!-- <script type='module' src='module1.js'></script>  -->
+
+
+
+
+
+    <!-- 
+        live server
+        在服务器下 有 index.html entry.js module1.js module2.js
+        // index.html script type ='module' src='entry.js'
+        // js => module let a = 10; ES6模块机制规定的 import export
+        // module1.js  export {xxxx};
+        // entry.js import {xxxx} from 'module1.js';
+        // import 按需导入 全体导入 默认导入  import()    
+        // export   export const xxxx = xx     export default xxxx;
+
+
+
+
+
+
+
+
+
+
+
+
+        // vue react + webpack commonjs ES6  
+        // import => commonjs 
+        // webpack 源码   node commonjs规范如何来写一写
+     -->
+
+
+
+
+
+
+</body>
+</html>
