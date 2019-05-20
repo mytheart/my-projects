@@ -473,13 +473,13 @@ Array.prototype.myReduce = function (func, initialValue) {
 
 
 // 30.获取url中的参数   
-function showWindonHref() {
+function getWindonHref() {
     var sHref = window.location.href;
     var args = sHref.split('?');
     if (args[0] === sHref) {
         return '';
     }
-    var hrefarr = args[1].split('&');
+    var hrefarr = args[1].split('#')[0].split('&');
     var obj = {};
     for (var i = 0; i < hrefarr.length; i++) {
         hrefarr[i] = hrefarr[i].split('=');
