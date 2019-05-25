@@ -811,7 +811,7 @@ function getSingle(func) {
     var result;
     return function () {
         if (!result) {
-            result = func.apply(this, arguments);
+            result = new func(arguments);
         }
         return result;
     }
