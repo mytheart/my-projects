@@ -1,0 +1,20 @@
+"Print to console": {
+		"prefix": "vue:5",
+		"body": [
+		  "<template>",
+		  "",
+		  "",
+		  "</template>",
+		  "",
+		  "<script>",
+		  "export default {",
+		  "",
+		  "}",
+		  "</script>",
+		  "",
+		  "<style scoped>",
+		  "",
+		  "</style>"
+	  	],
+		"description": "Log output to console"
+	}

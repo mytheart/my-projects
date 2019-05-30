@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    @font-face {
+      font-family: 'iconfont';
+      src: url('iconfont.eot');
+      src: url('iconfont.eot?#iefix') format('embedded-opentype'),
+           url('iconfont.woff2') format('woff2'),
+           url('iconfont.woff') format('woff'),
+           url('iconfont.ttf') format('truetype'),
+           url('iconfont.svg#iconfont') format('svg');
+    }
+
+    .tree-li {
+      font-size: 14px;
+      margin-left: 30px;
+      cursor: pointer; 
+    }
+
+    .scope::before {
+      display: inline-block;
+      content: '\e65a';
+      font-family: 'iconfont';
+    }
+
+    .active::before {
+      transform: rotateZ(-90deg);
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <tree :data="treeData"></tree>
+  </div>
+
+  <script>
+    const treeData = [
+      {
+        name: '一级 1',
+        children: [
+          { 
+            name: '二级 1-1', 
+            children: [ 
+              { 
+                name: '三级 1-1-1',
+                children: [
+                  {
+                    name: '四级 1-1-1-1'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: '一级 2',
+        children: [
+          { 
+            name: '二级 2-1',
+            children: [
+              {
+                name: '三级 2-1-1'
+              }
+            ]
+          },{
+            name: '二级 2-2',
+            children: [
+              {
+                name: '三级 2-2-1',
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: '一级 3',
+        children: [
+          {
+            name: '二级 3-1',
+            children: [
+              {
+                name: '三级 3-1-1'
+              }
+            ]
+          },
+          {
+            name: '二级 3-2',
+            children: [
+              {
+                name: '三级 3-1-1'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+
+    Vue.component('tree', {
+      props: ['data'],
+      template: `
+        <ul>
+          <li v-for="(item, index) in data" 
+              class="tree-li"
+              :class="{
+                'scope': item.children,
+                'active': showChildren[index]
+              }"
+          >
+            <span @click="handleClick(index)">{{ item.name }}</span>
+            <tree :data="item.children"
+                  v-show="showChildren[index]"
+                  v-if="alreadyShow[index]"
+            ></tree>
+          </li>
+        </ul>
+      `,
+      data () {
+        return {
+          showChildren: [],
+          alreadyShow: []
+        }
+      },
+      methods: {
+        handleClick (index) {
+          const show = !this.showChildren[index];
+          this.showChildren.splice(index, 1, show);
+          this.alreadyShow.splice(index, 1, true);
+        }
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        treeData
+      }
+    })
+  </script>
+</body>
+</html>
