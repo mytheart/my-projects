@@ -21,7 +21,7 @@ var robot = {
     },
     getData: function (val) {
         $.ajax({
-            url: 'http://api.duyiedu.com/api/chat/sendMsg?appkey=mytheart_1554172107474',
+            url: 'http://localhost:8888/getText',
             type: 'GET',
             data: {
                 msg: val
@@ -36,7 +36,6 @@ var robot = {
         })
     },
     addDom: function (data, who) {
-        console.log(data)
         var str = '';
         if (who === 'my') {
             str = '<p class="talk my">\
@@ -44,10 +43,9 @@ var robot = {
             <span class="text">' + data + '</span>\
         </p>'
         } else {
-            var domJson = JSON.parse(data);
             str = `<p class="talk robot">
             <span class="user"></span>
-            <span class="text">${domJson.data.text}</span>
+            <span class="text">${data.results[0].values.text}</span>
         </p>`
         }
         $('.inner').append(str);
