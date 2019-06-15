@@ -1,0 +1,31 @@
+@url=http://localhost:3001/api
+
+
+###
+GET http://localhost:3001
+
+### 获取所有用户信息
+GET {{url}}/users
+
+
+### 注册
+POST {{url}}/register
+Content-Type: application/json
+
+{
+    "username":"tongxin",
+    "password":"123456"
+}
+
+### 登陆
+POST {{url}}/login
+Content-Type: application/json
+
+{
+    "username":"tongxin",
+    "password":"123456"
+}
+
+### 获取个人信息（登陆操作之后）
+GET {{url}}/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMDNkMGI2MTZkNTA4MjkyNDEzZThkYiIsImlhdCI6MTU2MDUzMTE0N30.jM9vJicWOTcuuxZEKZyx3byOO81l6_YtxW0vusyP8WQ
