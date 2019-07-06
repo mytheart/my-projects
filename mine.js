@@ -99,11 +99,10 @@ function deepClone(target) {
 // 无法复制函数
 var o1 = JSON.parse(JSON.stringify(obj1));
 
-// 5.reverse底层原理和扩展
-// 改变原数组
+// 5.reverse底层原理和扩展（不改变原数组）
 Array.prototype.myReverse = function () {
     var len = this.length;
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < len / 2; i++) {
         var temp = this[i];
         this[i] = this[len - 1 - i];
         this[len - 1 - i] = temp;
@@ -113,7 +112,7 @@ Array.prototype.myReverse = function () {
 
 //6. 圣杯模式的继承
 function inherit(Target, Origin) {
-    function F() {};
+    function F() { };
     F.prototype = Origin.prototype;
     Target.prototype = new F();
     Target.prototype.constructor = Target;
@@ -328,7 +327,6 @@ function isPalina(str) {
 //   21.检验字符串是否是回文
 function isPalindrome(str) {
     str = str.replace(/\W/g, '').toLowerCase();
-    console.log(str)
     return (str == str.split('').reverse().join(''))
 }
 
@@ -417,10 +415,9 @@ Array.prototype.myForEach = function (func, obj) {
 
 // 26.封装自己的filter方法
 Array.prototype.myFilter = function (func, obj) {
-    var len = this.length;
     var arr = [];
     var _this = arguments[1] || window;
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < this.length; i++) {
         func.call(_this, this[i], i, this) && arr.push(this[i]);
     }
     return arr;
@@ -429,9 +426,8 @@ Array.prototype.myFilter = function (func, obj) {
 //  27.数组map方法
 Array.prototype.myMap = function (func) {
     var arr = [];
-    var len = this.length;
     var _this = arguments[1] || window;
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < this.length; i++) {
         arr.push(func.call(_this, this[i], i, this));
     }
     return arr;
@@ -440,9 +436,8 @@ Array.prototype.myMap = function (func) {
 // 28.数组every方法
 Array.prototype.myEvery = function (func) {
     var flag = true;
-    var len = this.length;
     var _this = arguments[1] || window;
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < this.length; i++) {
         if (func.apply(_this, [this[i], i, this]) == false) {
             flag = false;
             break;
@@ -623,7 +618,7 @@ Function.prototype.myBind = function (target) {
     var target = target || window;
     var _args1 = [].slice.call(arguments, 1);
     var self = this;
-    var temp = function () {};
+    var temp = function () { };
     var F = function () {
         var _args2 = [].slice.call(arguments, 0);
         var parasArr = _args1.concat(_args2);
